@@ -1,7 +1,9 @@
 import numpy as np
+import os
 
 print("Creating version 2 (small dataset)...")
-# Load version 1
+
+# This depends on v1 data being available
 x_train_v1 = np.load('data/raw/x_train_v1.npy')
 y_train_v1 = np.load('data/raw/y_train_v1.npy')
 

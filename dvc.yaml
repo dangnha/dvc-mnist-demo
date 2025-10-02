@@ -1,0 +1,48 @@
+stages:
+  download_v1:
+    cmd: python scripts/download_v1.py
+    deps:
+      - scripts/download_v1.py
+    outs:
+      - data/raw/x_train_v1.npy
+      - data/raw/y_train_v1.npy
+      - data/raw/x_test.npy
+      - data/raw/y_test.npy
+
+  download_v2:
+    cmd: python scripts/download_v2.py
+    deps:
+      - scripts/download_v2.py
+      - data/raw/x_train_v1.npy
+      - data/raw/y_train_v1.npy
+    outs:
+      - data/raw/x_train_v2.npy
+      - data/raw/y_train_v2.npy
+
+  train_v1:
+    cmd: python scripts/train.py --version v1
+    deps:
+      - scripts/train.py
+      - data/raw/x_train_v1.npy
+      - data/raw/y_train_v1.npy
+      - data/raw/x_test.npy
+      - data/raw/y_test.npy
+    outs:
+      - models/model_v1.npy
+    metrics:
+      - models/metrics_v1.json:
+          cache: false
+
+  train_v2:
+    cmd: python scripts/train.py --version v2
+    deps:
+      - scripts/train.py
+      - data/raw/x_train_v2.npy
+      - data/raw/y_train_v2.npy
+      - data/raw/x_test.npy
+      - data/raw/y_test.npy
+    outs:
+      - models/model_v2.npy
+    metrics:
+      - models/metrics_v2.json:
+          cache: false
