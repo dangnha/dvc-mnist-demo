@@ -1,9 +1,9 @@
 outs:
-- md5: dba30a9bedb80d8332f6097f9e057f83
-  size: 2406848
+- md5: b3053cd95825d5132bcc41a21faaee5b
+  size: 488354
   hash: md5
   path: model.npy
 
 meta:
   date: 02/10/2025
-  version: v1.0
+  version: v2.0
