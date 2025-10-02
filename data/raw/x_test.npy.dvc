@@ -1,0 +1,9 @@
+outs:
+- md5: 7942b66f2197f22a8ed486c6bc205255
+  size: 7840128
+  hash: md5
+  path: x_test.npy
+
+meta:
+  date: 02/10/2025
+  version: v1.0

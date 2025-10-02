@@ -1,0 +1,9 @@
+outs:
+- md5: 40b22dba779a1dffd8089edc7991f797
+  size: 60128
+  hash: md5
+  path: y_train_v1.npy
+
+meta:
+  date: 02/10/2025
+  version: v1.0
