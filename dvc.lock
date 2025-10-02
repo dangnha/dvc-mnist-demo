@@ -1,0 +1,114 @@
+schema: '2.0'
+stages:
+  download_v1:
+    cmd: python scripts/download_v1.py
+    deps:
+    - path: scripts/download_v1.py
+      hash: md5
+      md5: 5f5f8eb8aa44ab7f63ebcf09416a56d3
+      size: 471
+    outs:
+    - path: data/raw/x_test.npy
+      hash: md5
+      md5: 7942b66f2197f22a8ed486c6bc205255
+      size: 7840128
+    - path: data/raw/x_train_v1.npy
+      hash: md5
+      md5: 6e5236d1fa7110b7d4c75d3822137908
+      size: 47040128
+    - path: data/raw/y_test.npy
+      hash: md5
+      md5: 3deb6f9de60479b947785b62051694b8
+      size: 10128
+    - path: data/raw/y_train_v1.npy
+      hash: md5
+      md5: 40b22dba779a1dffd8089edc7991f797
+      size: 60128
+  download_v2:
+    cmd: python scripts/download_v2.py
+    deps:
+    - path: data/raw/x_train_v1.npy
+      hash: md5
+      md5: 6e5236d1fa7110b7d4c75d3822137908
+      size: 47040128
+    - path: data/raw/y_train_v1.npy
+      hash: md5
+      md5: 40b22dba779a1dffd8089edc7991f797
+      size: 60128
+    - path: scripts/download_v2.py
+      hash: md5
+      md5: 172d4def22b672f3152777b904e4773f
+      size: 569
+    outs:
+    - path: data/raw/x_train_v2.npy
+      hash: md5
+      md5: b7c1f1c27bf7f49845ff383a557567f8
+      size: 784128
+    - path: data/raw/y_train_v2.npy
+      hash: md5
+      md5: b0ccab896dfde982841a478771f20009
+      size: 1128
+  train_v1:
+    cmd: python scripts/train.py --version v1
+    deps:
+    - path: data/raw/x_test.npy
+      hash: md5
+      md5: 7942b66f2197f22a8ed486c6bc205255
+      size: 7840128
+    - path: data/raw/x_train_v1.npy
+      hash: md5
+      md5: 6e5236d1fa7110b7d4c75d3822137908
+      size: 47040128
+    - path: data/raw/y_test.npy
+      hash: md5
+      md5: 3deb6f9de60479b947785b62051694b8
+      size: 10128
+    - path: data/raw/y_train_v1.npy
+      hash: md5
+      md5: 40b22dba779a1dffd8089edc7991f797
+      size: 60128
+    - path: scripts/train.py
+      hash: md5
+      md5: a9172ace63a509a8f1af23dd55d901cd
+      size: 1689
+    outs:
+    - path: models/metrics_v1.json
+      hash: md5
+      md5: 394decebfef80b2dfc268fd01d845500
+      size: 104
+    - path: models/model_v1.npy
+      hash: md5
+      md5: dba30a9bedb80d8332f6097f9e057f83
+      size: 2406848
+  train_v2:
+    cmd: python scripts/train.py --version v2
+    deps:
+    - path: data/raw/x_test.npy
+      hash: md5
+      md5: 7942b66f2197f22a8ed486c6bc205255
+      size: 7840128
+    - path: data/raw/x_train_v2.npy
+      hash: md5
+      md5: b7c1f1c27bf7f49845ff383a557567f8
+      size: 784128
+    - path: data/raw/y_test.npy
+      hash: md5
+      md5: 3deb6f9de60479b947785b62051694b8
+      size: 10128
+    - path: data/raw/y_train_v2.npy
+      hash: md5
+      md5: b0ccab896dfde982841a478771f20009
+      size: 1128
+    - path: scripts/train.py
+      hash: md5
+      md5: a9172ace63a509a8f1af23dd55d901cd
+      size: 1689
+    outs:
+    - path: models/metrics_v2.json
+      hash: md5
+      md5: 4e7f885257baef147fe8e01987fa5018
+      size: 103
+    - path: models/model_v2.npy
+      hash: md5
+      md5: b3053cd95825d5132bcc41a21faaee5b
+      size: 488354

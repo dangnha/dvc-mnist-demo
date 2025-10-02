@@ -1,0 +1,6 @@
+{
+  "accuracy": 0.8047,
+  "dataset_size": 1000,
+  "dataset_version": "v2",
+  "model": "model_v2"
+}

@@ -1,9 +1,0 @@
-outs:
-- md5: b3053cd95825d5132bcc41a21faaee5b
-  size: 488354
-  hash: md5
-  path: model.npy
-
-meta:
-  date: 02/10/2025
-  version: v2.0
