@@ -1,0 +1,13 @@
+data:
+  v1:
+    description: "Full MNIST dataset"
+    samples: 60000
+  v2:
+    description: "Small dataset"
+    samples: 1000
+
+model:
+  type: "RandomForest"
+  n_estimators: 10
+  max_depth: 10
+  random_state: 42

@@ -2,5 +2,11 @@
   "accuracy": 0.8047,
   "dataset_size": 1000,
   "dataset_version": "v2",
-  "model": "model_v2"
+  "model": "model_v2",
+  "parameters": {
+    "type": "RandomForest",
+    "n_estimators": 10,
+    "max_depth": 10,
+    "random_state": 42
+  }
 }

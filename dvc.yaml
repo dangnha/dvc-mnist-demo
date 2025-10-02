@@ -1,3 +1,6 @@
+vars:
+  - data_version: ["v1", "v2"]
+
 stages:
   download_v1:
     cmd: python scripts/download_v1.py
@@ -19,30 +22,20 @@ stages:
       - data/raw/x_train_v2.npy
       - data/raw/y_train_v2.npy
 
-  train_v1:
-    cmd: python scripts/train.py --version v1
-    deps:
-      - scripts/train.py
-      - data/raw/x_train_v1.npy
-      - data/raw/y_train_v1.npy
-      - data/raw/x_test.npy
-      - data/raw/y_test.npy
-    outs:
-      - models/model_v1.npy
-    metrics:
-      - models/metrics_v1.json:
-          cache: false
-
-  train_v2:
-    cmd: python scripts/train.py --version v2
-    deps:
-      - scripts/train.py
-      - data/raw/x_train_v2.npy
-      - data/raw/y_train_v2.npy
-      - data/raw/x_test.npy
-      - data/raw/y_test.npy
-    outs:
-      - models/model_v2.npy
-    metrics:
-      - models/metrics_v2.json:
-          cache: false
+  train_${data_version}:
+    foreach: ${data_version}
+    do:
+      cmd: python scripts/train.py --version ${item}
+      deps:
+        - scripts/train.py
+        - data/raw/x_train_${item}.npy
+        - data/raw/y_train_${item}.npy
+        - data/raw/x_test.npy
+        - data/raw/y_test.npy
+      params:
+        - model
+      outs:
+        - models/model_${item}.npy
+      metrics:
+        - models/metrics_${item}.json:
+            cache: false

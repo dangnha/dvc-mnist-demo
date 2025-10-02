@@ -48,7 +48,7 @@ stages:
       hash: md5
       md5: b0ccab896dfde982841a478771f20009
       size: 1128
-  train_v1:
+  train_${data_version}@v1:
     cmd: python scripts/train.py --version v1
     deps:
     - path: data/raw/x_test.npy
@@ -69,18 +69,25 @@ stages:
       size: 60128
     - path: scripts/train.py
       hash: md5
-      md5: a9172ace63a509a8f1af23dd55d901cd
-      size: 1689
+      md5: 202d2598a5c7bd2c03403f33a2a84c30
+      size: 2063
+    params:
+      params.yaml:
+        model:
+          type: RandomForest
+          n_estimators: 10
+          max_depth: 10
+          random_state: 42
     outs:
     - path: models/metrics_v1.json
       hash: md5
-      md5: 394decebfef80b2dfc268fd01d845500
-      size: 104
+      md5: 9c2577379f3e1f533030a446d967d0fa
+      size: 229
     - path: models/model_v1.npy
       hash: md5
       md5: dba30a9bedb80d8332f6097f9e057f83
       size: 2406848
-  train_v2:
+  train_${data_version}@v2:
     cmd: python scripts/train.py --version v2
     deps:
     - path: data/raw/x_test.npy
@@ -101,13 +108,20 @@ stages:
       size: 1128
     - path: scripts/train.py
       hash: md5
-      md5: a9172ace63a509a8f1af23dd55d901cd
-      size: 1689
+      md5: 202d2598a5c7bd2c03403f33a2a84c30
+      size: 2063
+    params:
+      params.yaml:
+        model:
+          type: RandomForest
+          n_estimators: 10
+          max_depth: 10
+          random_state: 42
     outs:
     - path: models/metrics_v2.json
       hash: md5
-      md5: 4e7f885257baef147fe8e01987fa5018
-      size: 103
+      md5: 32c6059a7f6b28dd084543a010426a2b
+      size: 228
     - path: models/model_v2.npy
       hash: md5
       md5: b3053cd95825d5132bcc41a21faaee5b

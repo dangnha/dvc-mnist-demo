@@ -1,5 +1,6 @@
 import numpy as np
 import json
+import yaml
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 import os
@@ -7,6 +8,10 @@ import argparse
 
 def train_model(version):
     print(f"Training model for version: {version}")
+    
+    # Load parameters
+    with open('params.yaml', 'r') as f:
+        params = yaml.safe_load(f)
     
     # Load specific version data
     x_train = np.load(f'data/raw/x_train_{version}.npy')
@@ -19,9 +24,15 @@ def train_model(version):
     x_test_flat = x_test.reshape(x_test.shape[0], -1) / 255.0
 
     print(f"Training on {len(x_train)} samples...")
+    print(f"Model parameters: {params['model']}")
 
-    # Simple model
-    model = RandomForestClassifier(n_estimators=10, max_depth=10, random_state=42)
+    # Use parameters from params.yaml
+    model_params = params['model']
+    model = RandomForestClassifier(
+        n_estimators=model_params['n_estimators'],
+        max_depth=model_params['max_depth'],
+        random_state=model_params['random_state']
+    )
     model.fit(x_train_flat, y_train)
 
     # Evaluate
@@ -38,7 +49,8 @@ def train_model(version):
         'accuracy': float(accuracy),
         'dataset_size': len(x_train),
         'dataset_version': version,
-        'model': f'model_{version}'
+        'model': f'model_{version}',
+        'parameters': params['model']
     }
     
     with open(f'models/metrics_{version}.json', 'w') as f:
